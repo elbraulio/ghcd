@@ -23,3 +23,17 @@ All you need to change is in the beginning of the `deploy.sh` file. Here is:
 | deploy_folder        | path to the folder where the war should be copied.           | `/opt/tomcat/webapps`                   |
 | server_refresh       | the time that takes your server to refresh and deploy a new change. With a __s__ at the end. | `10s` (__with a 's' at the end__)       |
 
+## execute
+
+after you run this you must allow to execute the script doing this
+
+```bash
+$ chmod +x deploy.sh
+```
+
+now you can deploy your war using
+
+```bash
+$ ./deploy.sh
+```
+
