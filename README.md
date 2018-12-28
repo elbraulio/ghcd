@@ -37,3 +37,7 @@ now you can deploy your war using
 $ ./deploy.sh
 ```
 
+# Contribute
+
+Follow this rule, after each action you must go to `$build_folder`. So at the beginning of each action you can assume you are in `$build_folder`.
+
