@@ -60,7 +60,7 @@ rm $deploy_folder/$war_name
 # waiting server
 echo "waiting for server to take changes. $server_refresh"
 sleep $server_refresh
-cp target/*.war $deploy_folder/$war_name
+cp $build_folder/$repo_name/target/*.war $deploy_folder/$war_name
 # removing build folder
 cd $build_root
 rm -r $build_folder
