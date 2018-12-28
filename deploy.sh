@@ -53,6 +53,7 @@ if [[ $? != 0 ]] ; then
     rm -r $build_folder
     exit 1
 fi
+cd $build_root
 # deploy build
 echo "deploying"
 rm $deploy_folder/$war_name
@@ -60,6 +61,7 @@ rm $deploy_folder/$war_name
 echo "waiting for server to take changes. $server_refresh"
 sleep $server_refresh
 cp target/*.war $deploy_folder/$war_name
+# removing build folder
 cd $build_root
 rm -r $build_folder
 echo "DEPLOYED"
