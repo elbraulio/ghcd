@@ -6,7 +6,7 @@ repo_url=required*
 repo_name=required*
 # branch with the code that will be deployed.
 repo_branch=required*
-# war name to be deployed.
+# war name to be deployed without '.war' extension.
 war_name=required*
 # this will replace the original configuration from repo
 configuration_folder=required*
@@ -46,11 +46,11 @@ check_errors $?
 cd $build_root
 # deploy build
 echo "deploying"
-rm $deploy_folder/$war_name
+rm $deploy_folder/${war_name}.war
 # waiting server
 echo "waiting for server to take changes. $server_refresh"
 sleep $server_refresh
-cp $build_folder/$repo_name/target/*.war $deploy_folder/$war_name
+cp $build_folder/$repo_name/target/*.war $deploy_folder/${war_name}.war
 check_errors $?
 # removing build folder
 cd $build_root
