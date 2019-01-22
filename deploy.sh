@@ -32,12 +32,6 @@ if [[ $? != 0 ]] ; then
 fi
 cd $build_root
 # replace configuration
-rm -r $build_folder/$repo_name/src/main/resources/*
-if [[ $? != 0 ]] ; then
-    cd $build_root
-    rm -r $build_folder
-    exit 1
-fi
 cp -a $configuration_folder/. $build_folder/$repo_name/src/main/resources/
 if [[ $? != 0 ]] ; then
     cd $build_root
