@@ -1,4 +1,7 @@
+[![](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/elbraulio)
+
 # ghcd
+
 continuous delivery for Github projects. This supports __only mvn projects__.
 
 # How to 
