@@ -4,8 +4,8 @@
 repo_url=required*
 # repo name, MUST be the same with the name in repo_url.
 repo_name=required*
-# branch with the code that will be deployed.
-repo_branch=required*
+# branch or tag to be deployed.
+repo_branch_or_tag=required*
 # war name to be deployed without '.war' extension.
 war_name=required*
 # this will replace the original configuration from repo
@@ -32,7 +32,7 @@ mkdir $build_folder
 # clone repo
 echo "cloning repo $repo_url"
 cd $build_folder
-git clone -b $repo_branch --single-branch $repo_url
+git clone -b $repo_branch_or_tag --single-branch $repo_url
 check_errors $?
 cd $build_root
 # replace configuration

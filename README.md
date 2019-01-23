@@ -2,7 +2,7 @@
 
 # ghcd
 
-continuous delivery for Github projects. This supports __only mvn projects__.
+Easy deployments for Github projects. This supports __only mvn projects__.
 
 # How to 
 
@@ -20,7 +20,7 @@ All you need to change is in the beginning of the `deploy.sh` file. Here is:
 | :------------------- | ------------------------------------------------------------ | --------------------------------------- |
 | repo_url             | url to clone git repo.                                       | `https://github.com/elbraulio/ghcd.git` |
 | repo_name            | repo name that is included in `repo_url`.                    | `ghcd`                                  |
-| repo_branch          | branch that you want to deploy.                              | `master`                                |
+| repo_branch_or_tag   | branch or tag that you want to deploy.                       | `master` or `1.2.3`                     |
 | war_name             | name with which the war will be deployed __without '.war' extension__. | `dev-api`                               |
 | configuration_folder | contains the configurations files that will replace the original repo configuration files. | `/opt/configs/project1/config`          |
 | deploy_folder        | path to the folder where the war should be copied.           | `/opt/tomcat/webapps`                   |
