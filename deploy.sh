@@ -8,51 +8,58 @@ repo_name=required*
 repo_branch_or_tag=required*
 # war name to be deployed without '.war' extension.
 war_name=required*
-# this will replace the original configuration from repo
+# this will replace the original configuration from repo.
 configuration_folder=required*
+# build path; target for maven and build/libs for gradle.
+build_path=required*
+# script to build war (inside "").
+build_script="required*"
 # server folder to be deployed
 deploy_folder=required*
 # server refresh rate
 server_refresh=10s
 # ========= CONFIG> =========
-build_folder=deploying_war
+temp_path=deploying_war
 build_root=$(pwd)
 check_errors()
 {
     if [[ $1 != 0 ]] ; then
         cd $build_root
-        rm -r $build_folder
+        rm -r $temp_path
        exit 1
     fi
 }
 # make folder for deploying
-echo "trying to remove older and unused folders"
-rm -r $build_folder
-mkdir $build_folder
+echo "Trying to remove older and unused folders"
+rm -r $temp_path
+mkdir $temp_path
 # clone repo
-echo "cloning repo $repo_url"
-cd $build_folder
+echo "Cloning repo $repo_url"
+cd $temp_path
 git clone -b $repo_branch_or_tag --single-branch $repo_url
 check_errors $?
 cd $build_root
 # replace configuration
-cp -a $configuration_folder/. $build_folder/$repo_name/src/main/resources/
+echo "Replacing configuration files from $configuration_folder"
+cp -a $configuration_folder/. $temp_path/$repo_name/src/main/resources/
 check_errors $?
 # create a build
-echo "creating build"
-cd $build_folder/$repo_name
-mvn clean install
+echo "Creating build"
+cd $temp_path/$repo_name
+echo "Executing: $build_script"
+eval $build_script
 check_errors $?
 cd $build_root
 # deploy build
-echo "deploying"
+echo "Deploying to $deploy_folder"
 rm $deploy_folder/${war_name}.war
 # waiting server
-echo "waiting for server to take changes. $server_refresh"
+echo "Waiting for server to undeploy previous version $server_refresh"
 sleep $server_refresh
-cp $build_folder/$repo_name/target/*.war $deploy_folder/${war_name}.war
+echo "Copying project from $build_path to deploy folder"
+cp $temp_path/$repo_name/$build_path/*.war $deploy_folder/${war_name}.war
 check_errors $?
 # removing build folder
 cd $build_root
-rm -r $build_folder
-echo "DEPLOYED"
+rm -r $temp_path
+echo "SUCCESS"
